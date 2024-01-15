@@ -1,19 +1,21 @@
 import { useEffect, useState } from 'react';
-import { Select } from 'antd';
+import { Select, Spin } from 'antd';
 
 const ImageGallery = () => {
-  const [selectedChapter, setSelectedChapter] = useState('1123'); 
+  const [selectedChapter, setSelectedChapter] = useState('1123');
   const [lengthChapter, setLengthChapter] = useState(0);
   const [imageInChapter, setImageInChapter] = useState([]);
-  
+  const [loaded, setLoaded] = useState(false);
+
   const handleChange = (value) => {
     console.log(`Selected ${value}`);
     setSelectedChapter(value);
+    setLoaded(false); 
   };
 
   const options = Array.from({ length: 1123 }, (_, index) => ({
-    value: `${index + 1}`, 
-    label: `Chapter ${index + 1}`, 
+    value: `${index + 1}`,
+    label: `Chapter ${index + 1}`,
   }));
 
   useEffect(() => {
@@ -31,6 +33,7 @@ const ImageGallery = () => {
       }));
 
       setImageInChapter(newImageInChapter);
+      setLoaded(true); 
     };
 
     fetchImageUrls();
@@ -53,11 +56,17 @@ const ImageGallery = () => {
             }
           />
         </div>
-        {imageInChapter.map((image) => (
-          <div className='flex items-center justify-center' key={image.label}>
-            <img src={image.value} alt={image.label} />
+        {loaded ? (
+          imageInChapter.map((image) => (
+            <div className='flex items-center justify-center' key={image.label}>
+              <img src={image.value} alt={image.label} />
+            </div>
+          ))
+        ) : (
+          <div className='flex items-center justify-center py-4'>
+            <Spin size='large' />
           </div>
-        ))}
+        )}
       </div>
     </div>
   );
