@@ -3,6 +3,9 @@ import { Select } from 'antd';
 
 const ImageGallery = () => {
   const [selectedChapter, setSelectedChapter] = useState('1123'); 
+  const [lengthChapter, setLengthChapter] = useState(0);
+  const [imageInChapter, setImageInChapter] = useState([]);
+  
   const handleChange = (value) => {
     console.log(`Selected ${value}`);
     setSelectedChapter(value);
@@ -13,11 +16,30 @@ const ImageGallery = () => {
     label: `Chapter ${index + 1}`, 
   }));
 
-  const imageUrl = `https://itss-hedsocial.s3.amazonaws.com/conan/chap_${selectedChapter}/1.jpg`;
+  useEffect(() => {
+    const fetchImageUrls = async () => {
+      const response = await fetch(
+        `https://be-manga.vercel.app/length_folder?bucket_name=itss-hedsocial&folder_prefix=conan%2Fchap_${selectedChapter}`
+      );
+      const data = await response.json();
+      console.log(data);
+      setLengthChapter(data);
+
+      const newImageInChapter = Array.from({ length: data }, (_, index) => ({
+        value: `https://itss-hedsocial.s3.amazonaws.com/conan/chap_${selectedChapter}/${index + 1}.jpg`,
+        label: `Image ${index + 1}`,
+      }));
+
+      setImageInChapter(newImageInChapter);
+    };
+
+    fetchImageUrls();
+  }, [selectedChapter]);
+
   return (
     <div className='bg-[#f4f4f4] w-screen h-screen overflow-y-auto'>
       <div className='w-4/5 mx-auto bg-white'>
-        <div className='sticky top-0 items-center justify-center flex bg-gray-200 mt-10'>
+        <div className='sticky top-0 items-center justify-center flex bg-gray-200 mt-4 py-2'>
           <Select
             showSearch
             value={selectedChapter}
@@ -31,9 +53,11 @@ const ImageGallery = () => {
             }
           />
         </div>
-        <div className='flex items-center justify-center'>
-          <img src={imageUrl} alt={`Chapter ${selectedChapter}`} />
-        </div>
+        {imageInChapter.map((image) => (
+          <div className='flex items-center justify-center' key={image.label}>
+            <img src={image.value} alt={image.label} />
+          </div>
+        ))}
       </div>
     </div>
   );
