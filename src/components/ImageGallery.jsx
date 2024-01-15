@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Select, Spin } from 'antd';
+import { Select, Spin, Empty } from 'antd';
 
 const ImageGallery = () => {
   const [selectedChapter, setSelectedChapter] = useState('1123');
@@ -27,12 +27,16 @@ const ImageGallery = () => {
       console.log(data);
       setLengthChapter(data);
 
-      const newImageInChapter = Array.from({ length: data }, (_, index) => ({
-        value: `https://itss-hedsocial.s3.amazonaws.com/conan/chap_${selectedChapter}/${index + 1}.jpg`,
-        label: `Image ${index + 1}`,
-      }));
+      if (data === 0 || data >= 40) {
+        setImageInChapter([]); 
+      } else {
+        const newImageInChapter = Array.from({ length: data }, (_, index) => ({
+          value: `https://itss-hedsocial.s3.amazonaws.com/conan/chap_${selectedChapter}/${index + 1}.jpg`,
+          label: `Image ${index + 1}`,
+        }));
 
-      setImageInChapter(newImageInChapter);
+        setImageInChapter(newImageInChapter);
+      }
       setLoaded(true); 
     };
 
@@ -57,11 +61,17 @@ const ImageGallery = () => {
           />
         </div>
         {loaded ? (
-          imageInChapter.map((image) => (
-            <div className='flex items-center justify-center' key={image.label}>
-              <img src={image.value} alt={image.label} />
+          imageInChapter.length > 0 ? (
+            imageInChapter.map((image) => (
+              <div className='flex items-center justify-center' key={image.label}>
+                <img src={image.value} alt={image.label} />
+              </div>
+            ))
+          ) : (
+            <div className='flex items-center justify-center py-4'>
+              <Empty description='Not available' />
             </div>
-          ))
+          )
         ) : (
           <div className='flex items-center justify-center py-4'>
             <Spin size='large' />
