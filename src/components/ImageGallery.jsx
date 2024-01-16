@@ -21,7 +21,7 @@ const ImageGallery = () => {
   useEffect(() => {
     const fetchImageUrls = async () => {
       const response = await fetch(
-        `https://be-manga.vercel.app/length_folder?bucket_name=itss-hedsocial&folder_prefix=conan%2Fchap_${selectedChapter}`
+        `https://be-manga.vercel.app/length_folder?bucket_name=itss-hedsocial&folder_prefix=conan%2Fchap_${selectedChapter}/`
       );
       const data = await response.json();
       console.log(data);
