@@ -27,17 +27,24 @@ const ImageGallery = () => {
       console.log(data);
       setLengthChapter(data);
 
-      if (data === 0 || data >= 40) {
-        setImageInChapter([]); 
-      } else {
-        const newImageInChapter = Array.from({ length: data }, (_, index) => ({
-          value: `https://itss-hedsocial.s3.amazonaws.com/conan/chap_${selectedChapter}/${index + 1}.jpg`,
-          label: `Image ${index + 1}`,
-        }));
+      // if (data === 0 || data >= 40) {
+      //   setImageInChapter([]); 
+      // } else {
+      //   const newImageInChapter = Array.from({ length: data }, (_, index) => ({
+      //     value: `https://itss-hedsocial.s3.amazonaws.com/conan/chap_${selectedChapter}/${index + 1}.jpg`,
+      //     label: `Image ${index + 1}`,
+      //   }));
 
-        setImageInChapter(newImageInChapter);
-      }
-      setLoaded(true); 
+      //   setImageInChapter(newImageInChapter);
+      // }
+      // setLoaded(true); 
+      const newImageInChapter = Array.from({ length: data }, (_, index) => ({
+        value: `https://itss-hedsocial.s3.amazonaws.com/conan/chap_${selectedChapter}/${index + 1}.jpg`,
+        label: `Image ${index + 1}`,
+      }));
+
+      setImageInChapter(newImageInChapter);
+      setLoaded(true);
     };
 
     fetchImageUrls();
