@@ -4,8 +4,8 @@ import ImageGallery from './components/ImageGallery'
 function App() {
   return (
     <>
-      <Home/>
-      {/* <ImageGallery /> */}
+      {/* <Home/> */}
+      <ImageGallery />
     </>
   )
 }
