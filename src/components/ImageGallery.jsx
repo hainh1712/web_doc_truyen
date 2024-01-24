@@ -23,11 +23,6 @@ const ImageGallery = () => {
     setSelectedChapter(value);
     setLoaded(false); 
   };
-  
-  // const options = Array.from({ length: 1123 }, (_, index) => ({
-  //   value: `${index + 1}`,
-  //   label: `Chapter ${index + 1}`,
-  // }));
   let options = [];
   if (manga_name === "conan") {
     options = Array.from({ length: 1123 }, (_, index) => ({
@@ -48,18 +43,6 @@ const ImageGallery = () => {
       );
       const data = await response.json();
       setLengthChapter(data);
-
-      // if (data === 0 || data >= 40) {
-      //   setImageInChapter([]); 
-      // } else {
-      //   const newImageInChapter = Array.from({ length: data }, (_, index) => ({
-      //     value: `https://itss-hedsocial.s3.amazonaws.com/conan/chap_${selectedChapter}/${index + 1}.jpg`,
-      //     label: `Image ${index + 1}`,
-      //   }));
-
-      //   setImageInChapter(newImageInChapter);
-      // }
-      // setLoaded(true); 
       const newImageInChapter = Array.from({ length: data}, (_, index) => ({
         value: `https://itss-hedsocial.s3.amazonaws.com/${manga_name}/chap_${selectedChapter}/${index + 1}.jpg`,
         label: `Image ${index + 1}`,

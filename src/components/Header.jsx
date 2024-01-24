@@ -1,9 +1,9 @@
 import { Input, Space } from 'antd';
 const Header = ({ onSearch }) => {
   const { Search } = Input;
-  const handleSearch = (value) => {
-    console.log(value)
-  };
+  // const handleSearch = (value) => {
+  //   console.log(value)
+  // };
 
   return (
     <div className="bg-[#fdcf76] h-16 flex sticky top-0 z-10">

@@ -6,7 +6,7 @@ const Home = () => {
   useEffect(() => {
     const fetchImageManga = async () => {
       try {
-        const response = await fetch("https://be-manga.vercel.app/images/manga_name");
+        const response = await fetch("https://be-manga.vercel.app/images/manga_name/");
         if (response.ok) {
           const data = await response.json();
           setImages(data);
