@@ -3,12 +3,17 @@ import { useEffect, useState } from 'react';
 const Home = () => {
   const [images, setImages] = useState([]);
   const [filteredImages, setFilteredImages] = useState([]);
+  let dataTest = [{"url":"https://itss-hedsocial.s3.us-east-1.amazonaws.com/manga_name/conan.jpg","alt":"manga_name/conan.jpg","name":"conan"},{"url":"https://itss-hedsocial.s3.us-east-1.amazonaws.com/manga_name/onepiece.jpg","alt":"manga_name/onepiece.jpg","name":"onepiece"},{"url":"https://itss-hedsocial.s3.us-east-1.amazonaws.com/manga_name/yugioh.jpg","alt":"manga_name/yugioh.jpg","name":"yugioh"}]
   useEffect(() => {
     const fetchImageManga = async () => {
       try {
-        const response = await fetch("https://be-manga.vercel.app/images/manga_name/");
+        const response = await fetch("https://be-manga.vercel.app/images/manga_name");
         if (response.ok) {
           const data = await response.json();
+          if(data.length === 0) {
+            setImages(dataTest);
+            setFilteredImages(dataTest);
+          }
           setImages(data);
           setFilteredImages(data); 
         } else {
