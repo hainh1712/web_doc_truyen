@@ -34,6 +34,11 @@ const ImageGallery = () => {
       value: `${index + 1}`,
       label: `Chapter ${index + 1}`,
     }));
+  } else if (manga_name === "onepiece") {
+    options = Array.from({ length: 1105 }, (_, index) => ({
+      value: `${index + 1}`,
+      label: `Chapter ${index + 1}`,
+    }));
   }
 
   useEffect(() => {
