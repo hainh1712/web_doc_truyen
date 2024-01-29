@@ -1,6 +1,6 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import Home from './components/Home'
-import ImageGallery from './components/ImageGallery'
+import Home from "./components/Home";
+import ImageGallery from "./components/ImageGallery";
 
 function App() {
   return (

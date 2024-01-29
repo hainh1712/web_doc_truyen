@@ -5,6 +5,7 @@ import Header from "./Header";
 const ImageGallery = () => {
   const {manga_name} = useParams();
   const [selectedChapter, setSelectedChapter] = useState('1');
+  console.log(manga_name)
   // useEffect(() => {
   //   const fetchChapterOfManga  = async () => {
   //     const response = await fetch(`https://be-manga.vercel.app/length_manga/${manga_name}`);
@@ -24,17 +25,17 @@ const ImageGallery = () => {
     setLoaded(false); 
   };
   let options = [];
-  if (manga_name === "conan") {
+  if (manga_name == "conan") {
     options = Array.from({ length: 1123 }, (_, index) => ({
       value: `${index + 1}`,
       label: `Chapter ${index + 1}`,
     }));
-  } else if (manga_name === "yugioh") {
+  } else if (manga_name == "yugioh") {
     options = Array.from({ length: 343 }, (_, index) => ({
       value: `${index + 1}`,
       label: `Chapter ${index + 1}`,
     }));
-  } else if (manga_name === "onepiece") {
+  } else if (manga_name == "onepiece") {
     options = Array.from({ length: 1105 }, (_, index) => ({
       value: `${index + 1}`,
       label: `Chapter ${index + 1}`,
