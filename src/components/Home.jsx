@@ -12,7 +12,7 @@ const Home = () => {
           setImages(data);
           setFilteredImages(data); 
         } else {
-          console.error("Failed to fetch posts");
+          console.error("Failed to fetch data");
         }
       } catch (error) {
         console.error("Error:", error);
